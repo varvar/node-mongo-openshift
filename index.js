@@ -19,7 +19,16 @@ mongoose
     'mongodb://mongodb:27017/docker-node-mongo',
     { useNewUrlParser: true }
   )
-  .then(() => console.log('MongoDB Connected'))
+  mongoose
+  .connect(`${process.env.DATABASE_SERVICE_NAME}://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.DATABASE_SERVICE_NAME}:27017/${process.env.MONGODB_DATABASE}`);
+  .then(() => {
+    let db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'connection error:'));
+    db.once('open', function callback () {
+      console.log("Hello from mongo");
+    });
+    console.log('MongoDB Connected')
+  })
   .catch(err => console.log(err));
 
 const Item = require('./models/Item');
