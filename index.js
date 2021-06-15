@@ -14,13 +14,16 @@ console.log('process.env.MONGODB_DATABASE',process.env.MONGODB_DATABASE);
 console.log('process.env.MONGODB_ADMIN_PASSWORD',process.env.MONGODB_ADMIN_PASSWORD);
 
 // Connect to MongoDB
+// mongoose
+//   .connect(
+//     'mongodb://mongodb:27017/docker-node-mongo',
+//     { useNewUrlParser: true }
+//   )
 mongoose
   .connect(
-    'mongodb://mongodb:27017/docker-node-mongo',
-    { useNewUrlParser: true }
+      `${process.env.DATABASE_SERVICE_NAME}://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.DATABASE_SERVICE_NAME}:27017/${process.env.MONGODB_DATABASE}`,
+      { useNewUrlParser: true }
   )
-  mongoose
-  .connect(`${process.env.DATABASE_SERVICE_NAME}://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.DATABASE_SERVICE_NAME}:27017/${process.env.MONGODB_DATABASE}`);
   .then(() => {
     let db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
