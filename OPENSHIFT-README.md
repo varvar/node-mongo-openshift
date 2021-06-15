@@ -1,0 +1,1 @@
+oc new-project nodejs-mongo --display-name="nodejs-mongo" --description="Sample Node.js app with mongo DB"

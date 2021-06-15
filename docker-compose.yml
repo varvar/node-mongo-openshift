@@ -1,0 +1,17 @@
+version: '3'
+services:
+  node:
+    restart: always
+    image: sobolmisha/node-mongo
+    ports:
+      - 8081:3000
+    depends_on:
+      - mongo  
+  mongo:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+volumes:
+ mongodb:
