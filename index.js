@@ -7,6 +7,12 @@ app.set('view engine', 'ejs');
 
 app.use(express.urlencoded({ extended: false }));
 
+console.log('process.env.DATABASE_SERVICE_NAME',process.env.DATABASE_SERVICE_NAME);
+console.log('process.env.MONGODB_USER',process.env.MONGODB_USER);
+console.log('process.env.MONGODB_PASSWORD',process.env.MONGODB_PASSWORD);
+console.log('process.env.MONGODB_DATABASE',process.env.MONGODB_DATABASE);
+console.log('process.env.MONGODB_ADMIN_PASSWORD',process.env.MONGODB_ADMIN_PASSWORD);
+
 // Connect to MongoDB
 mongoose
   .connect(
