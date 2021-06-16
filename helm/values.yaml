@@ -1,0 +1,21 @@
+name: rest
+serverContainerPort: 8080
+serverServicePort: 8080
+namespace: openshift
+# Memory Limit: Maximum amount of memory the container can use.
+memory_limit: 512Mi
+# Application Hostname: The exposed hostname that will route to the Node.js service, if left blank a value will be defaulted.
+application_domain:
+# GitHub Webhook Secret: Github trigger secret.  A difficult to guess string encoded as part of the webhook URL.  Not encrypted.
+mongodbDatabase: docker-node-mongo
+mongodbAdminPass: Mongo123456&*#
+mongodbUser: mongo_user
+mongodbPass: Mng1234!##$%
+mongodbService: mongodb
+mongodbPort: 27017
+mongodbImage: registry.access.redhat.com/rhscl/mongodb-32-rhel7
+Rest:
+  LivenessEndPoint: /test
+  Image:
+    Repo: sobolmisha/rest
+    Tag: latest

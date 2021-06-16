@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name.service: {{ .Values.name }}
+  name: {{ .Values.name }}
+spec:
+  ports:
+    - name: "8080"
+      port: {{ .Values.serverServicePort }}
+      targetPort: {{ .Values.serverContainerPort }}
+  selector:
+    name.service: {{ .Values.name }}
+status:
+  loadBalancer: {}

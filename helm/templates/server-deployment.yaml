@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name.service: {{ .Values.name }}
+  name: {{ .Values.name }}
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name.service: {{ .Values.name }}
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        name.service: {{ .Values.name }}
+    spec:
+      containers:
+        - env:
+            - name: DATABASE_SERVICE_NAME
+              value: '{{ .Values.mongodbService }}'
+            - name: MONGODB_PASSWORD
+              value: '{{ .Values.mongodbPass }}'
+            - name: MONGODB_USER
+              value: '{{ .Values.mongodbUser }}'  
+            - name: MONGODB_ADMIN_PASSWORD
+              value: '{{ .Values.mongodbAdminPass }}'
+            - name: MONGODB_DATABASE
+              value: '{{ .Values.mongodbDatabase }}'
+          image: '{{ .Values.Rest.Image.Repo }}:{{ .Values.Rest.Image.Tag }}'
+          name: '{{ .Values.name }}'
+          ports:
+            - name: liveness-port
+              containerPort: {{ .Values.serverContainerPort }}
+          resources: {}
+      restartPolicy: Always
+status: {}
